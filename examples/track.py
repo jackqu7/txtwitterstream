@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import TwistedTwitterStream
+import twitterstream
 from twisted.internet import reactor
 
-class consumer(TwistedTwitterStream.TweetReceiver):
+class consumer(twitterstream.TweetReceiver):
     def connectionMade(self):
         print "connected..."
 
@@ -19,6 +19,6 @@ class consumer(TwistedTwitterStream.TweetReceiver):
         # permanently disconnect from the Twitter Stream
 
 if __name__ == "__main__":
-    TwistedTwitterStream.filter("username", "password", consumer(),
+    twitterstream.Client("username", "password").filter(consumer(),
             track=["football", "soccer", "world cup", "palmeiras"])
     reactor.run()

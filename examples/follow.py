@@ -10,10 +10,10 @@
 #    fd.close()
 #    print doc.get("id")
 
-import TwistedTwitterStream
+import twitterstream
 from twisted.internet import reactor
 
-class consumer(TwistedTwitterStream.TweetReceiver):
+class consumer(twitterstream.TweetReceiver):
     def connectionMade(self):
         print "connected..."
 
@@ -25,6 +25,6 @@ class consumer(TwistedTwitterStream.TweetReceiver):
         print "new tweet:", repr(tweet)
 
 if __name__ == "__main__":
-    TwistedTwitterStream.filter("username", "password", consumer(),
+    twitterstream.Client("username", "password").filter(consumer(),
             follow=["101010", "202020", "303030", "404040"])
     reactor.run()

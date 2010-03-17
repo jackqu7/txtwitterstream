@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import TwistedTwitterStream
+import twitterstream
 from twisted.internet import reactor
 
-class consumer(TwistedTwitterStream.TweetReceiver):
+class consumer(twitterstream.TweetReceiver):
     def connectionMade(self):
         print "connected..."
 
