@@ -24,7 +24,7 @@ from twisted.web.http_headers import Headers
 from twisted.web.client import ResponseDone
 from twisted.web.http import PotentialDataLoss
 
-from twitterstream.util import StringProducer, auth_header
+from txtwitterstream.util import StringProducer, auth_header
 
 try:
     import simplejson as _json

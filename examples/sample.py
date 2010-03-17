@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import twitterstream
+import txtwitterstream
 from twisted.internet import reactor
 
-class consumer(twitterstream.TweetReceiver):
+class consumer(txtwitterstream.TweetReceiver):
     def connectionMade(self):
         print "connected..."
 
@@ -18,5 +18,5 @@ class consumer(twitterstream.TweetReceiver):
 if __name__ == "__main__":
     #TwistedTwitterStream.firehose("username", "password", consumer())
     #TwistedTwitterStream.retweet("username", "password", consumer())
-    TwistedTwitterStream.sample("username", "password", consumer())
+    txtwitterstream.Client("username, password").sample(consumer())
     reactor.run()
