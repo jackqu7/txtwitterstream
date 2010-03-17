@@ -133,6 +133,7 @@ class Client(object):
         
         f = None
         if post_body:
+            headers.addRawHeader("Content-Type", "application/x-www-form-urlencoded")
             f = HTTPReconnectingClientFactory("POST", endpoint, headers, consumer, post_body)
         else:
             f = HTTPReconnectingClientFactory("GET", endpoint, headers, consumer)
