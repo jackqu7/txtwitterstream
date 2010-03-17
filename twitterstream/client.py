@@ -148,7 +148,7 @@ class Client(object):
     def sample(self, consumer):
         self._stream(consumer, "/1/statuses/sample.json")
 
-    def filter(self, consumer, count=0, delimited=0, track=[], follow=[]):
+    def filter(self, consumer, count=0, delimited=0, track=[], follow=[], locations=None):
         qs = []
         if count:
             qs.append("count=%s" % urllib.quote(count))
@@ -158,8 +158,10 @@ class Client(object):
             qs.append("follow=%s" % ",".join(follow))
         if track:
             qs.append("track=%s" % ",".join([urllib.quote(s) for s in track]))
+        if locations:
+            qs.append("locations=%s" % urllib.quote(locations))
 
-        if not (track or follow):
-            raise RuntimeError("At least one parameter is required: track or follow")
+        if not (track or follow or locations):
+            raise RuntimeError("At least one parameter is required: track, follow or locations")
     
         self._stream(consumer, "/1/statuses/filter.json", "&".join(qs))
