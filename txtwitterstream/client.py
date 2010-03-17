@@ -14,9 +14,6 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-"""Twisted client library for the Twitter Streaming API:
-http://apiwiki.twitter.com/Streaming-API-Documentation"""
-
 import urllib
 
 from twisted.protocols import basic
