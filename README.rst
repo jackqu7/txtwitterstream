@@ -36,3 +36,9 @@ Thanks to (in no particular order):
 - Vanderson Mota
 
   - Patching setup.py and PyPi maintenance
+
+Licence
+=======
+Permission is hereby granted to any person obtaining a copy of this work to
+deal in this work without restriction (including the rights to use, modify,
+distribute, sublicense, and/or sell copies).
