@@ -4,11 +4,11 @@
 from setuptools import setup
 
 setup(
-    name="TwistedTwitterStream",
-    version="0.0.1",
-    description="Twisted client library for the Twitter Streaming API",
-    author="Alexandre Fiori",
-    url="http://github.com/fiorix/twisted-twitter-stream",
-    py_modules=["TwistedTwitterStream"],
-    #install_requires=["twisted"],
+    name="txTwitterStream",
+    version="0.0.2",
+    description="A fork of Alexandre Fiori's TwistedTwitterStream Twitter client library for the Twitter Streaming API",
+    author="Wade Simmons",
+    url="http://github.com/wadey/txtwitterstream",
+    py_modules=["txtwitterstream"],
+    install_requires=["twisted >= 9.0.0"],
 )
