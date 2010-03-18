@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 trove_classifiers=[
     "Development Status :: 4 - Beta",
@@ -26,7 +26,11 @@ setup(
     author_email="wade@wades.im",
     url="http://github.com/wadey/txtwitterstream",
     py_modules=["txtwitterstream"],
+    packages = find_packages(),
+    test_suite="txtwitterstream.test",
     install_requires=["Twisted >= 9.0.0"],
+    setup_requires=['setuptools_trial'],
+    tests_require=['mock'],
     license = "BSD",
     classifiers=trove_classifiers,
     zip_safe = False, # We prefer unzipped for easier access.
