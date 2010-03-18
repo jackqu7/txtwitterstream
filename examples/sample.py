@@ -18,5 +18,5 @@ class consumer(txtwitterstream.TweetReceiver):
 if __name__ == "__main__":
     #TwistedTwitterStream.firehose("username", "password", consumer())
     #TwistedTwitterStream.retweet("username", "password", consumer())
-    txtwitterstream.Client("username, password").sample(consumer())
+    txtwitterstream.Client("username", "password").sample(consumer())
     reactor.run()
