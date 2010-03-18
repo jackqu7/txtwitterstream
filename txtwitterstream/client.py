@@ -24,6 +24,7 @@ from twisted.web.http_headers import Headers
 from twisted.web.client import ResponseDone
 from twisted.web.http import PotentialDataLoss
 
+import txtwitterstream
 from txtwitterstream.util import StringProducer, auth_header
 
 try:
@@ -62,8 +63,8 @@ class TweetReceiver(object):
             raise RuntimeError("not connected")
 
 class TwitterStreamProtocol(basic.LineReceiver):
-    def __init__(self, factory):
-        self.consumer = factory.consumer
+    def __init__(self, consumer):
+        self.consumer = consumer
 
     def lineReceived(self, line):
         line = line.strip()
@@ -104,10 +105,11 @@ class HTTPReconnectingClientFactory(protocol.ReconnectingClientFactory):
         d = proto.request(client.Request(self.method, self.path, self.headers, (self.body and StringProducer(self.body))))
         d.addCallback(self._got_headers, self.consumer)
         d.addErrback(defer.logError)
+        return d
 
     def _got_headers(self, response, consumer):
         if response.code == 200:
-            response.deliverBody(TwitterStreamProtocol(self))
+            response.deliverBody(TwitterStreamProtocol(self.consumer))
             consumer.connectionMade()
         else:
             consumer.connectionFailed(Exception("Server returned: %s %s" % (response.code, response.phrase)))
@@ -116,14 +118,16 @@ class HTTPReconnectingClientFactory(protocol.ReconnectingClientFactory):
                 self.proto.transport.loseConnection()
     
 class Client(object):
-    def __init__(self, username, password):
+    def __init__(self, username, password, host="stream.twitter.com", port=80, user_agent=("txtwitterstream/%s" % txtwitterstream.__version__)):
         self.username = username
         self.password = password
+        self.host = host
+        self.port = port
 
-    def _stream(self, consumer, endpoint, post_body=None):
+    def stream(self, consumer, endpoint, post_body=None):
         headers = Headers()
         headers.addRawHeader("Authorization", auth_header(self.username, self.password))
-        headers.addRawHeader("Host", "stream.twitter.com")
+        headers.addRawHeader("Host", "%s:%s" % (self.host, self.port))
         
         f = None
         if post_body:
@@ -131,16 +135,16 @@ class Client(object):
             f = HTTPReconnectingClientFactory("POST", endpoint, headers, consumer, post_body)
         else:
             f = HTTPReconnectingClientFactory("GET", endpoint, headers, consumer)
-        reactor.connectTCP("stream.twitter.com", 80, f)
+        reactor.connectTCP(self.host, self.port, f)
 
     def firehose(self, consumer):
-        self._stream(consumer, "/1/statuses/firehose.json")
+        self.stream(consumer, "/1/statuses/firehose.json")
 
     def retweet(self, consumer):
-        self._stream(consumer, "/1/statuses/retweet.json")
+        self.stream(consumer, "/1/statuses/retweet.json")
 
     def sample(self, consumer):
-        self._stream(consumer, "/1/statuses/sample.json")
+        self.stream(consumer, "/1/statuses/sample.json")
 
     def filter(self, consumer, count=0, delimited=0, track=[], follow=[], locations=None):
         qs = []
@@ -158,4 +162,4 @@ class Client(object):
         if not (track or follow or locations):
             raise RuntimeError("At least one parameter is required: track, follow or locations")
     
-        self._stream(consumer, "/1/statuses/filter.json", "&".join(qs))
+        self.stream(consumer, "/1/statuses/filter.json", "&".join(qs))
