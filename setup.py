@@ -20,7 +20,7 @@ trove_classifiers=[
 
 setup(
     name="txTwitterStream",
-    version="0.0.2",
+    version="0.0.3",
     description="A fork of Alexandre Fiori's TwistedTwitterStream Twitter client library for the Twitter Streaming API",
     author="Wade Simmons",
     author_email="wade@wades.im",
