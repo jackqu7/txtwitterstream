@@ -1,0 +1,10 @@
+Name                               Stmts   Miss Branch BrPart  Cover
+--------------------------------------------------------------------
+txtwitterstream/__init__               4      0      0      0   100%
+txtwitterstream/client               109     68     26     25    31%
+txtwitterstream/test/__init__          1      0      0      0   100%
+txtwitterstream/test/test_client      13      0      0      0   100%
+txtwitterstream/test/test_import      13      0     11      2    91%
+txtwitterstream/util                  18      7      0      0    61%
+--------------------------------------------------------------------
+TOTAL                                158     75     37     27    47%
