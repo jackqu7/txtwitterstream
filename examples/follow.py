@@ -6,7 +6,7 @@
 #
 #    screen_name = "BarackObama"
 #    fd = urllib.urlopen("http://twitter.com/users/show/%s.json" % screen_name)
-#    doc = simplejson.loads(fd.read())
+#    doc = json.loads(fd.read())
 #    fd.close()
 #    print doc.get("id")
 

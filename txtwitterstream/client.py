@@ -27,14 +27,7 @@ from twisted.web.http import PotentialDataLoss
 import txtwitterstream
 from txtwitterstream.util import StringProducer, auth_header
 
-try:
-    import simplejson as _json
-except ImportError:
-    try:
-        import json as _json
-    except ImportError:
-        raise RuntimeError("A JSON parser is required, e.g., simplejson at "
-                           "http://pypi.python.org/pypi/simplejson/")
+from pyutil import jsonutil as json
 
 class TweetReceiver(object):
     def connectionMade(self):
@@ -69,7 +62,7 @@ class TwitterStreamProtocol(basic.LineReceiver):
     def lineReceived(self, line):
         line = line.strip()
         if line:
-            tweet = _json.loads(line)
+            tweet = json.loads(line)
             self.consumer.tweetReceived(tweet)
             
     def connectionLost(self, reason):

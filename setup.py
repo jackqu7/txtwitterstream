@@ -28,7 +28,7 @@ setup(
     py_modules=["txtwitterstream"],
     packages = find_packages(),
     test_suite="txtwitterstream.test",
-    install_requires=["Twisted >= 9.0.0"],
+    install_requires=['Twisted >= 9.0.0', 'pyutil >= 1.7.0'],
     setup_requires=['setuptools_trial'],
     tests_require=['mock'],
     license = "BSD",

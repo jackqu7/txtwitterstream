@@ -16,7 +16,7 @@ The following methods are supported:
 
 Notes
 =====
- - A JSON parser is required. Like `json <http://docs.python.org/library/json.html>`_ or `simplejson <http://pypi.python.org/pypi/simplejson/>`_.
+ - A JSON parser is required. Like `json <http://docs.python.org/library/json.html>`_, `simplejson <http://pypi.python.org/pypi/simplejson/>`_, or `jsonutil <http://tahoe-lafs.org/trac/pyutil/browser/pyutil/pyutil/jsonutil.py>`.
  - All methods will automatically reconnect to the server with an exponential back-off. See `t.i.p.ReconnectingClientFactory <http://twistedmatrix.com/documents/8.2.0/api/twisted.internet.protocol.ReconnectingClientFactory.html>`_ for details.
  - All methods must be initialized with a *consumer* object, inherited from `TwistedTwitterStream.TweetReceiver`
  - No proxy support.
