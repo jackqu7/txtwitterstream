@@ -29,7 +29,7 @@ setup(
     packages = find_packages(),
     test_suite="txtwitterstream.test",
     install_requires=['Twisted >= 9.0.0', 'pyutil >= 1.7.0'],
-    setup_requires=['setuptools_trial'],
+    setup_requires=['setuptools_trial', 'setuptools_pyflakes'],
     tests_require=['mock'],
     license = "BSD",
     classifiers=trove_classifiers,
