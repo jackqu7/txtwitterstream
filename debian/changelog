@@ -1,3 +1,9 @@
+python-txtwitterstream (0.0.3sg0) unstable; urgency=low
+
+  * Make the version appropriate for a native package.
+
+ -- Ian Eure <ian@simpegeo.com>  Fri, 18 Jun 2010 16:49:32 -0700
+
 python-txtwitterstream (0.0.3-sg0) unstable; urgency=low
 
   * Fix package name.
