@@ -1,3 +1,9 @@
+python-txtwitterstream (0.0.3-sg0) unstable; urgency=low
+
+  * Fix package name.
+
+ -- Ian Eure <ian@simplegeo.com>  Fri, 18 Jun 2010 16:43:58 -0700
+
 txtwitterstream (0.0.3) unstable; urgency=low
 
   * Initial Release.

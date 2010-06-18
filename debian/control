@@ -7,7 +7,7 @@ Build-Depends: cdbs, debhelper (>= 7), python, python-setuptools, python-support
 Standards-Version: 3.8.4
 Homepage: http://github.com/simplegeo/txtwitterstream
 
-Package: txtwitterstream
+Package: python-txtwitterstream
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, python-twisted, python-pyutil
 Description: A client library for the Twitter Streaming API
