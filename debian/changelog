@@ -1,4 +1,4 @@
-python-txtwitterstream (0.0.3sg0) unstable; urgency=low
+txtwitterstream (0.0.3sg0) unstable; urgency=low
 
   * Make the version appropriate for a native package.
 
