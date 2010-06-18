@@ -1,3 +1,13 @@
+python-txtwitterstream (0.0.3-sg4) lucid; urgency=low
+
+  [ Ian Eure ]
+  * Move setup_requires stuff to tests_require; setup doesn't require
+    them.
+
+  [ SimpleGeo Nerds ]
+
+ -- SimpleGeo Nerds <nerds@simplegeo.com>  Fri, 18 Jun 2010 23:48:48 +0000
+
 python-txtwitterstream (0.0.3-sg0) unstable; urgency=low
 
   * Fix package name.
