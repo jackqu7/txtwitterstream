@@ -1,0 +1,28 @@
+This work was packaged for Debian by:
+
+    Ian Eure <ian@simplegeo.com> on Fri, 18 Jun 2010 16:28:16 -0700
+
+It was downloaded from:
+
+    http://github.com/simplegeo/txtwitterstream
+
+Upstream Author(s):
+
+    Wade Simmons <wade@wades.im>
+
+Copyright:
+
+    Copyright (C) 2009, 2010 Wade Simmons
+
+License:
+
+   BSD.
+
+On Debian systems, the complete text of the BSD license can be found
+in `/usr/share/common-licenses/BSD'.
+
+The Debian packaging is:
+
+    Copyright (C) 2010 SimpleGeo, Inc.
+
+and is licensed under the BSD License, see above.
