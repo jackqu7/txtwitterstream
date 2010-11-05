@@ -1,3 +1,12 @@
+txtwitterstream (0.0.3sg11) lucid; urgency=low
+
+  [ dsmith ]
+  * Use simplejson
+
+  [ SimpleGeo Nerds ]
+
+ -- SimpleGeo Nerds <nerds@simplegeo.com>  Fri, 05 Nov 2010 06:27:13 +0000
+
 txtwitterstream (0.0.3sg10) lucid; urgency=low
 
   * UNRELEASED
