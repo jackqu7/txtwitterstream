@@ -9,6 +9,6 @@ Homepage: http://github.com/simplegeo/txtwitterstream
 
 Package: python-txtwitterstream
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, python-twisted, python-pyutil
+Depends: ${shlibs:Depends}, ${misc:Depends}, python-twisted, python-simplejson
 Description: A client library for the Twitter Streaming API
  This is a fork of Alexandre Fiori's TwistedTwitterStream library.

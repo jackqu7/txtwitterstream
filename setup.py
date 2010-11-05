@@ -28,7 +28,7 @@ setup(
     py_modules=["txtwitterstream"],
     packages = find_packages(),
     test_suite="txtwitterstream.test",
-    install_requires=['Twisted >= 9.0.0', 'pyutil >= 1.7.0'],
+    install_requires=['Twisted >= 9.0.0', 'simplejson'],
     tests_require=['setuptools_trial', 'setuptools_pyflakes', 'mock'],
     license = "BSD",
     classifiers=trove_classifiers,

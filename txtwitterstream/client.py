@@ -27,7 +27,7 @@ from twisted.web.http import PotentialDataLoss
 import txtwitterstream
 from txtwitterstream.util import StringProducer, auth_header
 
-from pyutil import jsonutil as json
+import simplejson as json
 
 class TweetReceiver(object):
     def connectionMade(self):
