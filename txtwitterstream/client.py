@@ -56,14 +56,18 @@ class TweetReceiver(object):
             raise RuntimeError("not connected")
 
 class TwitterStreamProtocol(basic.LineReceiver):
-    def __init__(self, consumer):
+    def __init__(self, consumer, raw):
         self.consumer = consumer
+        self.raw = raw
 
     def lineReceived(self, line):
         line = line.strip()
         if line:
-            tweet = json.loads(line)
-            self.consumer.tweetReceived(tweet)
+            if self.raw:
+                self.consumer.tweetReceived(line)
+            else:
+                tweet = json.loads(line)
+                self.consumer.tweetReceived(tweet)
             
     def connectionLost(self, reason):
         if reason.check(ResponseDone) or reason.check(PotentialDataLoss):
@@ -75,13 +79,14 @@ class HTTPReconnectingClientFactory(protocol.ReconnectingClientFactory):
     maxDelay = 120
     protocol = client.HTTP11ClientProtocol
 
-    def __init__(self, method, path, headers, consumer, body=None):
+    def __init__(self, method, path, headers, consumer, body=None, raw=False):
         self.method = method
         self.path = path
         self.headers = headers
         self.consumer = consumer
         self.proto = None
         self.body = body
+        self.raw = raw
 
     def buildProtocol(self, addr):
         self.resetDelay()
@@ -102,7 +107,7 @@ class HTTPReconnectingClientFactory(protocol.ReconnectingClientFactory):
 
     def _got_headers(self, response, consumer):
         if response.code == 200:
-            response.deliverBody(TwitterStreamProtocol(self.consumer))
+            response.deliverBody(TwitterStreamProtocol(self.consumer, self.raw))
             consumer.connectionMade()
         else:
             consumer.connectionFailed(Exception("Server returned: %s %s" % (response.code, response.phrase)))
@@ -111,11 +116,12 @@ class HTTPReconnectingClientFactory(protocol.ReconnectingClientFactory):
                 self.proto.transport.loseConnection()
     
 class Client(object):
-    def __init__(self, username, password, host="stream.twitter.com", port=80, user_agent=("txtwitterstream/%s" % txtwitterstream.__version__)):
+    def __init__(self, username, password, host="stream.twitter.com", port=80, user_agent=("txtwitterstream/%s" % txtwitterstream.__version__), raw=False):
         self.username = username
         self.password = password
         self.host = host
         self.port = port
+        self.raw = raw
 
     def stream(self, consumer, endpoint, post_body=None):
         headers = Headers()
@@ -125,9 +131,9 @@ class Client(object):
         f = None
         if post_body:
             headers.addRawHeader("Content-Type", "application/x-www-form-urlencoded")
-            f = HTTPReconnectingClientFactory("POST", endpoint, headers, consumer, post_body)
+            f = HTTPReconnectingClientFactory("POST", endpoint, headers, consumer, body=post_body, raw=self.raw)
         else:
-            f = HTTPReconnectingClientFactory("GET", endpoint, headers, consumer)
+            f = HTTPReconnectingClientFactory("GET", endpoint, headers, consumer, raw=self.raw)
         reactor.connectTCP(self.host, self.port, f)
 
     def firehose(self, consumer):
